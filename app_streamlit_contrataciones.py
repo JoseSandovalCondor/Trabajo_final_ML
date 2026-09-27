@@ -31,17 +31,17 @@ import numpy as np
 
 #-------------------------PROCESO DE DESPLIEGUE------------------------------
 
-# 01 - Load the model
+# 01 - Load the model (ruta relativa: funciona en local y en la nube)
 clf = load('modelo_contrataciones.joblib')
 
 #-------------------------CARGA DE DATOS PARA FILTRADO DINÁMICO------------------------------
-# Ruta de la base de datos (la misma que usamos para entrenar)
-path_base = r'C:\Users\Jose\Documents\3_INEI_ML_SET_2026'
 
 @st.cache_data
 def cargar_datos():
-    """Carga el CSV y lo cachea para no leerlo en cada interacción."""
-    return pd.read_csv(f'{path_base}\\data\\contrataciones.csv', sep=';')
+    """Carga el CSV y lo cachea para no leerlo en cada interacción.
+    Usa ruta relativa para funcionar tanto en local como en Streamlit Cloud."""
+    """return pd.read_csv('contrataciones.csv', sep=';')"""
+    return pd.read_csv('data/contrataciones.csv', sep=';')
 
 # Cargar datos (solo se lee una vez gracias al caché)
 df_datos = cargar_datos()
